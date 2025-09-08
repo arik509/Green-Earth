@@ -1,6 +1,27 @@
 const loadCategory = () => {
-    
+    fetch("https://openapi.programming-hero.com/api/categories")
+    .then((res) => res.json())
+    .then((json) => displayCategory(json))
 }
+
+const displayCategory = (categoriesData) =>{
+    const categories = categoriesData.categories;
+    console.log(categories);
+
+    const categoryContainer = document.getElementById('category-container')
+    categoryContainer.innerHTML = "";
+
+    for(category of categories){
+        const li = document.createElement("li")
+        li.className = "p-2 hover:bg-green-300"
+        li.innerHTML = `
+        <a href="">${category.category_name}</a>
+        ` 
+        categoryContainer.appendChild(li);
+    }
+}
+
+loadCategory()
 
 
 const loadtree = () =>{
