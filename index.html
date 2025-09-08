@@ -53,7 +53,8 @@
             <h1 class="text-[36px] lg:text-[48px] font-bold text-center">
                 Plant a Tree, Grow a Future
             </h1>
-            <p class="text-center">Join our mission to plant 1 million trees and make the Earth greener for future generations.</p>
+            <p class="text-center">Join our mission to plant 1 million trees and make the Earth greener for future
+                generations.</p>
             <button class="btn btn-warning rounded-2xl text-green-600">Get Involved</button>
         </div>
         <div class="hidden lg:flex">
@@ -70,13 +71,13 @@
             <div class="w-[250px]">
                 <h1 class="font-semibold text-[20px]">Categories</h1>
                 <ul id="category-container" class="space-y-[10px] mt-[10px] font-semibold">
-                    
+
                 </ul>
             </div>
 
 
             <div id="card-container" class="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-[30px]">
-                
+
             </div>
 
             <div id="cart-container" class="w-[250px] bg-white p-4">
@@ -92,7 +93,7 @@
                         <button>❌</button>
                     </div>
                 </div>
-            
+
                 <div class="divider"></div>
                 <div class="flex justify-between">
                     <p class="font-bold">Total:</p>
@@ -101,6 +102,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <button class="btn" onclick="my_modal.showModal()">open modal</button>
+    <dialog id="my_modal" class="modal modal-bottom sm:modal-middle">
+        <div id="details-container" class="modal-box space-y-[10px]">
+           
+        </div>
+    </dialog>
 
 
     <script src="script.js"></script>
