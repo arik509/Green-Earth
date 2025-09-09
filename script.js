@@ -95,7 +95,7 @@ const displayLoadTree = (plants) => {
 
         const button = card.querySelector(".add-cart-btn");
         button.addEventListener("click", () => {
-            addToCart(plant.id, plant.name, plant.price);
+            addToCart(plant.name, plant.price);
         });
 
         cardContainer.appendChild(card);
@@ -131,9 +131,9 @@ const displaytreeDetails = (data) =>{
     document.getElementById('my_modal').showModal()
 }
 
+let cartPrice = 0;
 
-
-const addToCart = (id,name,price) => {
+const addToCart = (name,price) => {
     const cartContainer = document.getElementById('cart-container')
 
     console.log(name,price);
@@ -151,8 +151,6 @@ const addToCart = (id,name,price) => {
                     </div>
     `
     cartContainer.appendChild(cart);
-
-    let cartPrice = parseInt(document.getElementById("total-price").innerText);
 
     cartPrice = cartPrice + price;
 
