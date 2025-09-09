@@ -1,3 +1,15 @@
+const manageSpinner = (status) => {
+    if(status){
+        document.getElementById('spinner').classList.remove('hidden');
+        document.getElementById('card-container').classList.add('hidden');
+    }
+    else{
+        document.getElementById('spinner').classList.add('hidden');
+        document.getElementById('card-container').classList.remove('hidden');
+    }
+}
+
+
 const loadCategory = () => {
     fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -15,7 +27,7 @@ const displayCategory = (categoriesData) =>{
         const li = document.createElement("li")
         li.className = "p-2 hover:bg-green-300"
         li.innerHTML = `
-        <a href="#">${category.category_name}</a>
+        <span style="cursor:pointer">${category.category_name} </span>
         ` 
 
         li.addEventListener('click', (() => {
@@ -34,6 +46,8 @@ const displayCategory = (categoriesData) =>{
 }
 
 const loadPlantsCategory = (id) => {
+    manageSpinner(true);
+
     fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
     .then((json) => displayLoadTree(json.plants))
@@ -41,6 +55,8 @@ const loadPlantsCategory = (id) => {
 
 
 const loadAlltree = () =>{
+    manageSpinner(true);
+
     const url = "https://openapi.programming-hero.com/api/plants"
     fetch(url)
     .then((res) => res.json())
@@ -48,10 +64,11 @@ const loadAlltree = () =>{
 }
 
 const displayLoadTree = (plants) => {
+
     const cardContainer = document.getElementById('card-container')
     cardContainer.innerHTML = "";
 
-    for(plant of plants) {
+    for(let plant of plants) {
         const card = document.createElement('div')
         card.innerHTML = `
         <div class="card bg-base-100 w-90 shadow-sm p-4 space-y-[10px] h-[450px]">
@@ -60,8 +77,8 @@ const displayLoadTree = (plants) => {
                         src="${plant.image}" />
                     </figure>
                     <div class="card-body p-0 space-y-[10px]">
-                      <h2 id="plant-name-${plant.id}" onclick="loadTreeDetails(${plant.id})" class="card-title">
-                        ${plant.name}
+                      <h2 id="plant-name-${plant.id}" onclick="loadTreeDetails(${plant.id})" class="card-title"> 
+                        <span style="cursor:pointer"> ${plant.name} </span>
                       </h2>
                       <p class="w-full">${plant.description}</p>
                       <div class="card-actions justify-between">
@@ -69,13 +86,21 @@ const displayLoadTree = (plants) => {
                         <div class="font-bold">৳${plant.price}</div>
                       </div>
                       <div class="">
-                        <button class="bg-[#15803D] w-full text-white py-3 px-[100px] rounded-2xl">Add to Cart</button>
+                        <button class="add-cart-btn bg-[#15803D] w-full text-white py-3 px-[100px] rounded-2xl" style="cursor:pointer">Add to Cart</button>
                       </div>
                     </div>
                 </div>
+
         `
 
+        const button = card.querySelector(".add-cart-btn");
+        button.addEventListener("click", () => {
+            addToCart(plant.id, plant.name, plant.price);
+        });
+
         cardContainer.appendChild(card);
+
+        manageSpinner(false);
     }
 
 }
@@ -104,6 +129,44 @@ const displaytreeDetails = (data) =>{
     </div>
     `
     document.getElementById('my_modal').showModal()
+}
+
+
+
+const addToCart = (id,name,price) => {
+    const cartContainer = document.getElementById('cart-container')
+
+    console.log(name,price);
+    
+    const cart = document.createElement("div")
+    cart.innerHTML = `
+    <div class="cart flex justify-between items-center bg-[#F0FDF4] mt-3 p-3 rounded-[5px]">
+                        <div class="space-y-[12px]">
+                            <p class="font-bold">${name}</p>
+                            <p>৳${price} x 1</p>
+                        </div>
+                        <div>
+                            <button style="cursor:pointer" class="remove-cart-btn"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+    `
+    cartContainer.appendChild(cart);
+
+    let cartPrice = parseInt(document.getElementById("total-price").innerText);
+
+    cartPrice = cartPrice + price;
+
+    console.log(cartPrice);
+
+    document.getElementById('total-price').innerText = cartPrice;
+
+    const removeButton = cart.querySelector(".remove-cart-btn");
+    removeButton.addEventListener("click", () => {
+        cart.remove();
+        cartPrice = cartPrice - price;
+        document.getElementById('total-price').innerText = cartPrice;
+    });
+
 }
 
 loadCategory()

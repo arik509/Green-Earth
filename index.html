@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="assets/hero-leaf1.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="inter bg-[#F0FDF4]">
@@ -67,6 +68,10 @@
             <h1 class="text-[32px] font-semibold text-center">Choose Your Trees</h1>
         </div>
 
+        <section id="spinner" class="flex justify-center items-center py-10 hidden">
+            <span class="loading loading-dots loading-xl"></span>
+        </section>
+
         <div class="flex flex-col lg:flex-row gap-[30px] items-center lg:items-start">
             <div class="w-[250px]">
                 <h1 class="font-semibold text-[20px]">Categories</h1>
@@ -80,24 +85,18 @@
 
             </div>
 
-            <div id="cart-container" class="w-[250px] bg-white p-4">
+            <div class="w-[300px] bg-white p-4">
                 <h1 class="text-[20px] font-bold">Your Cart</h1>
 
 
-                <div class="flex justify-between items-center bg-[#F0FDF4] mt-3 p-3 rounded-[5px]">
-                    <div class="space-y-[12px]">
-                        <p class="font-bold">Mango tree</p>
-                        <p>৳500 x 1</p>
-                    </div>
-                    <div>
-                        <button>❌</button>
-                    </div>
+                <div id="cart-container">
+                    
                 </div>
 
                 <div class="divider"></div>
                 <div class="flex justify-between">
                     <p class="font-bold">Total:</p>
-                    <p>৳500</p>
+                    <p>৳ <span id="total-price">0</span></p>
                 </div>
             </div>
         </div>
