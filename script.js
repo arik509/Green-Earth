@@ -134,6 +134,8 @@ const displaytreeDetails = (data) =>{
 let cartPrice = 0;
 
 const addToCart = (name,price) => {
+    alert(`${name} is added to cart`);
+
     const cartContainer = document.getElementById('cart-container')
 
     console.log(name,price);
@@ -167,6 +169,6 @@ const addToCart = (name,price) => {
 
 }
 
-// loadCategory()
+loadCategory()
 
-// loadAlltree();
+loadAlltree();
