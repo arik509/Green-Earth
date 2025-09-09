@@ -167,6 +167,6 @@ const addToCart = (name,price) => {
 
 }
 
-loadCategory()
+// loadCategory()
 
-loadAlltree();
+// loadAlltree();
